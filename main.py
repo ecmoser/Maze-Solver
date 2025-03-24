@@ -10,7 +10,7 @@ def draw_test_points(test_points, win):
 
 def draw_test_cells(test_cells, win):
     for cell in test_cells:
-        cell.draw("red")
+        cell.draw("black")
 
 def main():
     win = Window(800, 600)
@@ -22,6 +22,8 @@ def main():
                 
     draw_test_points(test_points, win)
     draw_test_cells(test_cells, win)
+    test_cells[1].draw_move(test_cells[3])
+    test_cells[2].draw_move(test_cells[3], undo=True)
 
     win.wait_for_close()
 
