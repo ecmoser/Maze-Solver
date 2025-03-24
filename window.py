@@ -11,6 +11,9 @@ class Window():
         self.__canvas.pack()
         self.running = False
 
+    def draw_line(self, line, fill_color):
+        line.draw(self.__canvas, fill_color)
+
     def redraw(self):
         self.__root.update_idletasks()
         self.__root.update()
