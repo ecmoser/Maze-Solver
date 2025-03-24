@@ -14,14 +14,23 @@ class Cell():
         self._win = window
     
     def draw(self, fill):
+        empty_fill = "white"
         if self.has_top_wall:
             self._win.draw_line(Line(Point(self._x1, self._y1), Point(self._x2, self._y1)), fill)
+        else:
+            self._win.draw_line(Line(Point(self._x1, self._y1), Point(self._x2, self._y1)), empty_fill)
         if self.has_bottom_wall:
             self._win.draw_line(Line(Point(self._x1, self._y2), Point(self._x2, self._y2)), fill)
+        else:
+            self._win.draw_line(Line(Point(self._x1, self._y2), Point(self._x2, self._y2)), empty_fill)
         if self.has_left_wall:
             self._win.draw_line(Line(Point(self._x1, self._y1), Point(self._x1, self._y2)), fill)
+        else:
+            self._win.draw_line(Line(Point(self._x1, self._y1), Point(self._x1, self._y2)), empty_fill)
         if self.has_right_wall:
             self._win.draw_line(Line(Point(self._x2, self._y1), Point(self._x2, self._y2)), fill)
+        else:
+            self._win.draw_line(Line(Point(self._x2, self._y1), Point(self._x2, self._y2)), empty_fill)
 
     def draw_move(self, to_cell, undo=False):
         self_center = Point((self._x1 + self._x2) / 2, (self._y1 + self._y2) / 2)
@@ -51,9 +60,21 @@ class Maze():
                          self._y1 + self._cell_size_y * (j + 1),
                          self._win)
                 col.append(c)
-                c.draw("black")
                 self._animate()
             self._cells.append(col)
+        for i in range(len(self._cells)):
+            for j in range(len(self._cells[0])):
+                self._draw_cell(i, j)
+
+    def _break_entrance_and_exit(self):
+        self._cells[0][0].has_left_wall = False
+        self._draw_cell(0, 0)
+        self._cells[-1][-1].has_right_wall = False
+        self._draw_cell(-1, -1)
+
+
+    def _draw_cell(self, i, j):
+        self._cells[i][j].draw("black")
     
     def _animate(self):
         self._win.redraw()
