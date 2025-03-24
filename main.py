@@ -21,6 +21,10 @@ def main():
                   Cell(110, 110, 160, 160, win, False, False, False, False))
     test_maze = Maze(10, 10, 10, 10, 50, 50, win)
 
+    test_maze._break_entrance_and_exit()
+    test_maze._break_walls_r(0,0)
+    test_maze._reset_cells_visited()
+    test_maze.solve()
     win.wait_for_close()
 
 main()
