@@ -11,7 +11,6 @@ class Line():
         self.point_b = point_b
 
     def draw(self, canvas, fill):
-        print("making line from", self.point_a.x, self.point_a.y, "to", self.point_b.x, self.point_b.y)
         canvas.create_line(self.point_a.x, self.point_a.y,
                            self.point_b.x, self.point_b.y, 
                            fill=fill, width=2)
